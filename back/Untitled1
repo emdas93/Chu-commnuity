@@ -1,0 +1,97 @@
+$(".enterChatRoom").click(function(e){
+        
+        var user_name = $("meta[name='currentUserName']").attr("content");
+        var user_id = $("meta[name='currentUserID']").attr("content");
+        if(user_name == undefined){
+            alert("로그인 하셔야합니다.");
+            return 0;
+        }
+        if($("div.chatBox[data-id="+$(this).attr("data-id")+"]").length >= 1){
+            return 0;
+        }
+        var r_no = $(this).attr("data-id");
+        var r_name = $(this).text();
+        var chatBox = $("<div></div>").addClass("chatBox panel panel-default").attr("data-id",r_no);
+        
+        var chatBox_header = $("<div></div>").addClass("chatBox-header panel-heading");
+        var chatBox_title = $("<span></span>").addClass("panel-title").text(r_name);
+        var chatBox_joined = $("<span></span>").addClass("badge joined").text(0);
+        var chatBox_close = $("<a></a>").addClass("pull-right").attr("href","#closeChat");
+        var chatBox_close_btn = $("<i></i>").addClass("glyphicon glyphicon-remove");
+        chatBox_close_btn.appendTo(chatBox_close);
+        chatBox_title.appendTo(chatBox_header);
+        chatBox_joined.appendTo(chatBox_header);
+        chatBox_close.appendTo(chatBox_header);
+        chatBox_header.appendTo(chatBox);
+        
+        var chatBox_body = $("<div></div>").addClass("panel-body chatBox-body");
+        var commentBox = $("<div></div>").addClass("commentBox");
+        var body_participants = $("<div></div>").addClass("panel panel-default participants pull-right");
+        var participants_heading = $("<div></div>").addClass("panel-heading");
+        var participants_title = $("<h5></h5>").addClass("panel-title").text("참여자");
+        var participants_body = $("<div></div>").addClass("panel-body partList");
+        commentBox.appendTo(chatBox_body);
+        participants_title.appendTo(participants_heading);
+        participants_heading.appendTo(body_participants);
+        participants_body.appendTo(body_participants);
+        body_participants.appendTo(chatBox_body);
+        chatBox_body.appendTo(chatBox);
+        
+        var chatBox_footer = $("<div></div>").addClass("panel-footer chatBox-footer");
+        var form_group = $("<div></div>").addClass("form-group");
+        var chatContent = $("<input>").addClass("form-control chatMessage");
+        var sendBtn = $("<button></button>").addClass("btn btn-primary btn-block sendMessage").text("보내기");
+        chatContent.appendTo(form_group);
+        sendBtn.appendTo(form_group);
+        form_group.appendTo(chatBox_footer);
+        chatBox_footer.appendTo(chatBox);
+        
+        chatBox.appendTo(".chat");
+        $(".chatBox").show("fast");
+        $(".chatBox").draggable();
+        
+        socket.emit('enterRoom', {"r_no" : r_no, "user_name":user_name, "r_name":r_name, "user_id":user_id});
+        
+        //close Chat
+        $("a[href='#closeChat']").click(function(){
+            var target = $(this).parent().parent();
+            var dataID = target.attr("data-id");
+            var r_name = target.find("span").text();
+            $(".chatBox[data-id="+dataID+"]").hide("fast", function(){
+                $(".chatBox[data-id="+dataID+"]").remove();
+            });
+            socket.emit('leaveRoom', {"r_no" : dataID, "user_name":user_name, "r_name":r_name, "user_id":user_id});
+            
+        });
+        
+        $(".sendMessage").on('click',function(){
+            sendMessage(this);
+        });
+        $(".chatMessage").on('keyup', function(event){
+            if(event.keyCode == 13) sendMessage(this);
+        });
+        
+        $.ajax({
+            url: "https://emdas-emdas93.c9users.io/chat/getLogs",
+            data:{
+                r_no:r_no
+            },
+            method:"post",
+            dataType:"json",
+            success:function(data){
+                for(var i = 0; i<data.length;++i){
+                    var messageSet = $("<div></div>").addClass("messageSet");
+                    console.log(user_name);
+                    if(user_id == data[i].c_user_id) messageSet.addClass("text-right");
+                    else messageSet.addClass("text-left");
+                    var user_nameH3 = $("<h3></h3>").addClass("text-success").text(data[i].c_user_name+"["+data[i].c_user_id+"]");
+                    var user_messageH4 = $("<h4></h4>").addClass("text-info").text(data[i].c_comment);
+                    user_nameH3.appendTo(messageSet);
+                    user_messageH4.appendTo(messageSet);
+                    messageSet.appendTo(".commentBox");
+                }
+                $(".chatBox-body").scrollTop($(".commentBox").height());
+            },
+        })
+        
+    });
