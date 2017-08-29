@@ -2,13 +2,12 @@
     <!--Intro-->
     <div role="tabpanel" class="tab-pane fade in active" id="intro">
         <div class="inner cover">
-            <!--<div class="fadeSet">-->
-            <!--    <h1 class="fadeText">추승협</h1>-->
-            <!--    <h1 class="fadeText">포트폴리오</h1>-->
-            <!--    <h1 class="fadeText">START</h1>-->
-            <!--</div>-->
-            <!--<h1 class="cover-heading">Chu's Portfolio</h1>-->
-                <p class="lead">회원가입 Chat 테스트</p>
+            <div class="fadeSet">
+                <h1 class="fadeText">추승협</h1>
+                <h1 class="fadeText">포트폴리오</h1>
+                <h1 class="fadeText">START</h1>
+            </div>
+            <h1 class="cover-heading">Chu's Portfolio</h1>
             <p class="lead">
                 <!--<a href="{{secure_url('/')}}" class="btn btn-lg btn-default" id="enter">들어가기</a>-->
             </p>
@@ -18,24 +17,23 @@
     
     <!--About Me-->
     <div role="tabpanel" class="tab-pane fade" id="aboutMe">
-        <!--<div class="inner cover">-->
-        <!--    <div class="row">-->
-        <!--        <div class="col-md-8 text-left">-->
-        <!--            <h3>이름 : 추승협</h3>-->
-        <!--            <h3>양념치킨 : 5000원</h3>-->
-        <!--            <h3>후라이드 : 5000원</h3>-->
-        <!--            <h3>생년월일 : 1993-07-09</h3>-->
-        <!--        </div>-->
-        <!--        <div class="col-md-4">-->
-        <!--            <img src="{{secure_asset('image/introMe.jpg')}}" class="img-responsive img-circle" alt="Responsive image">-->
-        <!--        </div>-->
-        <!--    </div>-->
-        <!--    <h1 class="cover-heading">Chu's Portfolio</h1>-->
-        <!--        <p class="lead">좀 더 알고 싶으시면 아래의 버튼을 눌러주세요</p>-->
-        <!--    <p class="lead">-->
-        <!--        <a href="{{secure_url('/')}}" class="btn btn-lg btn-default" id="enter">들어가기</a>-->
-        <!--    </p>-->
-        <!--</div>-->
+        <div class="inner cover">
+            <div class="row">
+                <div class="col-md-8 text-left">
+                    <h3>이름 : 추승협</h3>
+                    <h3>취미 : 운동</h3>
+                    <h3>생년월일 : 1993-07-09</h3>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{secure_asset('image/introMe.jpg')}}" class="img-responsive img-circle" alt="Responsive image">
+                </div>
+            </div>
+            <h1 class="cover-heading">Chu's Portfolio</h1>
+                <p class="lead">좀 더 알고 싶으시면 아래의 버튼을 눌러주세요</p>
+            <p class="lead">
+                <a href="{{secure_url('/')}}" class="btn btn-lg btn-default" id="enter">들어가기</a>
+            </p>
+        </div>
     </div>
     <!--About Me-->
     

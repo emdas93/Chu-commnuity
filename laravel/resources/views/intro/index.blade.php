@@ -9,7 +9,7 @@
     <meta name="user_name" content="{{Session::get('user')->user_name}}">
     <meta name="user_id" content="{{Session::get('user')->user_id}}">
     @endif
-    <title>채팅테스트</title>
+    <title>포트폴리오</title>
     <link href="{{secure_asset('css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{secure_asset('css/intro.css')}}" rel="stylesheet">
     <link href="{{secure_asset('css/master.css')}}" rel="stylesheet">
@@ -28,7 +28,7 @@
                 <div class="cover-container">
                     <div class="masthead clearfix">
                         <div class="inner">
-                            <h3 class="masthead-brand">Chatting Test Page</h3>
+                            <h3 class="masthead-brand">Chu's Portfolio</h3>
                             <nav>
                                 <ul class="nav masthead-nav">
                                 <li class="active"><a href="#intro" aria-controls="intro" role="tab" data-toggle="tab">Intro</a></li>
